@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## AdTech News Search Engine with React, Next.js, and Material-UI
 
-## Getting Started
+This project is a dynamic ad technology news search engine built with React, Next.js, and Material-UI. 
 
-First, run the development server:
+### Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+* **Search Functionality:** Users can search for relevant ad tech news articles using a search bar.
+* **News API Integration:** The application leverages the News API ([https://newsapi.org/](https://newsapi.org/)) to fetch and display search results specifically focused on ad tech news. 
+* **User Interface:** The user interface is built with Material-UI components, providing a clean and responsive design.
+* **Next.js:** This project utilizes Next.js for server-side rendering (SSR) and static site generation (SSG) capabilities, enhancing performance and SEO.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Technologies Used
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+* Frontend: React, Next.js, Material-UI
+* Data Source: News API ([https://newsapi.org/](https://newsapi.org/)) (**Free for Development with limitations**)
+* State Management: Consider using a state management library like Redux or Context API for complex applications. (Optional)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Getting Started
 
-## Learn More
+1. **Clone the Repository:**
 
-To learn more about Next.js, take a look at the following resources:
+   ```bash
+   git clone https://github.com/<your-username>/fin-dashboard.git
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. **Install Dependencies:**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   ```bash
+   cd fin-dashboard
+   npm install
+   ```
 
-## Deploy on Vercel
+3. **Get a News API Key:**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   - Visit the News API website ([https://newsapi.org/](https://newsapi.org/)) and create an account.
+   - Navigate to your account dashboard and generate an API key.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+4. **Configure API Key:**
+
+   - Create a `.env.local` file in the project root directory.
+   - Add the following line to the `.env.local` file, replacing `<YOUR_API_KEY>` with your actual API key:
+
+     ```
+     REACT_APP_API_KEY=<YOUR_API_KEY>
+     ```
+
+   - **Important:** Never commit the `.env.local` file to version control.
+
+5. **Run the Development Server:**
+
+   ```bash
+   npm run dev
+   ```
+
+   This will start the development server and open the application in your default web browser at http://localhost:3000 by default.
+
+### Deployment
+
+You can deploy this application to a static hosting platform like Vercel, Netlify, or Firebase. Refer to the documentation of your chosen platform for specific deployment instructions.
+
+### Contributing
+
+We welcome contributions to this project! Please see the CONTRIBUTING.md file for guidelines on how to contribute.
+
+### License
+
+This project is licensed under the MIT License. See the LICENSE file for details.
