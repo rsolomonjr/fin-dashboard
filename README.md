@@ -20,7 +20,7 @@ This project is a dynamic ad technology news search engine built with React, Nex
 1. **Clone the Repository:**
 
    ```bash
-   git clone https://github.com/<your-username>/adtech-news-search.git
+   git clone [https://github.com/<your-username>/fin-dashboard.git]
    ```
 
 2. **Install Dependencies:**
