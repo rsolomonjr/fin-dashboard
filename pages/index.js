@@ -65,8 +65,12 @@ const Home = () => {
     <ThemeProvider theme={theme}>
     <Container maxWidth="md" sx={{ py: 8 }}>
       <Typography variant="h1" component="h1" gutterBottom align="center" 
-                  sx={{ mb: 6, color: 'primary.main' }}>
+                  sx={{ mb: 1, color: 'primary.main' }}>
         AdTech Insights
+      </Typography>
+      <Typography variant="h4" component="h4" gutterBottom align="center" 
+                  sx={{ mb: 3, color: 'primary.main' }}>
+        The latest news from around the world
       </Typography>
       
       <Grid container spacing={2} alignItems="center" sx={{ mb: 6 }}>
