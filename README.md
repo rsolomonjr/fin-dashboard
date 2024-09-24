@@ -26,7 +26,7 @@ This project is a dynamic ad technology news search engine built with React, Nex
 2. **Install Dependencies:**
 
    ```bash
-   cd adtech-news-search
+   cd fin-dashboard
    npm install
    ```
 
