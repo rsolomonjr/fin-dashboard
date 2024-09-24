@@ -8,9 +8,9 @@ import {
   Card, 
   CardContent, 
   CardActions,
-  ThemeProvider,
-  createTheme
+  ThemeProvider
 } from '@mui/material';
+import theme from "../src/theme";
 import { Search as SearchIcon } from 'lucide-react';
 
 import axios from 'axios';
@@ -18,34 +18,7 @@ import axios from 'axios';
 const NEWS_API_KEY = '6b27f085df724fa9b1631e862970ad62';
 const NEWS_API_URL = 'https://newsapi.org/v2/everything';
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#1c1c1c', // Dark gray for primary color
-    },
-    secondary: {
-      main: '#f5f5f5', // Light gray for secondary color
-    },
-    background: {
-      default: '#ffffff', // White background
-    },
-  },
-  typography: {
-    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
-    h1: {
-      fontSize: '2.5rem',
-      fontWeight: 700,
-    },
-    h2: {
-      fontSize: '2rem',
-      fontWeight: 600,
-    },
-    body1: {
-      fontSize: '1rem',
-      lineHeight: 1.6,
-    },
-  },
-});
+
 
 const Home = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -113,7 +86,7 @@ const Home = () => {
             sx={{
               '& .MuiOutlinedInput-root': {
                 '&.Mui-focused fieldset': {
-                  borderColor: 'primary.main',
+                  borderColor: 'primary.main'
                 },
               },
             }}
