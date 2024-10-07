@@ -12,8 +12,7 @@ import {
 } from '@mui/material';
 import theme from "../src/theme";
 import { Search as SearchIcon } from 'lucide-react';
-
-import axios from 'axios';
+import ky from 'ky';
 
 const NEWS_API_KEY = '6b27f085df724fa9b1631e862970ad62';
 const NEWS_API_URL = 'https://newsapi.org/v2/everything';
@@ -28,17 +27,17 @@ const Home = () => {
   const handleSearch = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(NEWS_API_URL, {
-        params: {
+      const response = await ky.get(NEWS_API_URL, {
+        searchParams: {
           q: `${searchTerm} AND (adtech OR "ad tech" OR advertising OR marketing)`,
           language: 'en',
           sortBy: 'publishedAt',
           pageSize: 10,
           apiKey: NEWS_API_KEY
         }
-      });
+      }).json();
   
-      const articles = response.data.articles
+      const articles = response.articles
         .filter(article => 
           article.title !== "[Removed]" && 
           article.description !== "[Removed]"
