@@ -21,6 +21,7 @@ export default function MyApp(props) {
       <Head>
         <title>Ad Tech News Search</title>
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
+        <link rel="icon" href="/favicon/icons8-ads-50.png" />
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
