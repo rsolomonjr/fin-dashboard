@@ -8,6 +8,7 @@ This project is a dynamic ad technology news search engine built with React, Nex
 * **News API Integration:** The application leverages the News API ([https://newsapi.org/](https://newsapi.org/)) to fetch and display search results specifically focused on ad tech news. 
 * **User Interface:** The user interface is built with Material-UI components, providing a clean and responsive design.
 * **Next.js:** This project utilizes Next.js for server-side rendering (SSR) and static site generation (SSG) capabilities, enhancing performance and SEO.
+* **Ky API:** Includes Ky API, a newer, cleaner and faster API, better than fetch and axios ([Ky](https://www.npmjs.com/package/ky)) 
 
 ### Technologies Used
 
