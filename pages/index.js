@@ -33,6 +33,7 @@ const suggestions = [
   "native ads",
   "mobile ads",
   "ad serving",
+  "ad security",
   "ad tracking",
   "ad analytics",
   "ad attribution",
@@ -171,12 +172,12 @@ const Home = () => {
           The latest news from around the world
         </Typography>
         
-        <Grid container spacing={2} alignItems="center" sx={{ mb: 10 }}>
+        <Grid container spacing={2} alignItems="center" sx={{ mb: 10, px: { xs: 2, sm: 0 } }}>
           <Grid item xs={10}>
             <Box position="relative">
               <input
                 type="text"
-                placeholder="Type here to see suggestions"
+                placeholder="ad tracking, ad security..."
                 value={searchTerm}
                 onChange={handleChange}
                 onKeyDown={(e) => {
@@ -225,7 +226,7 @@ const Home = () => {
               )}
             </Box>
           </Grid>
-          <Grid item xs={2}>
+          <Grid item xs={1}>
             <Button 
               variant="contained" 
               color="primary" 
@@ -238,7 +239,7 @@ const Home = () => {
                 '&:hover': {
                   boxShadow: 'none',
                   backgroundColor: 'primary.dark',
-                },
+                }
               }}
             >
               <SearchIcon />
