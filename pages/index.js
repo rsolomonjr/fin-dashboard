@@ -56,6 +56,7 @@ const Home = () => {
   });
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState(-1);
 
   const handleSearch = async () => {
     setLoading(true);
@@ -150,6 +151,7 @@ const Home = () => {
   const handleChange = (e) => {
     const value = e.target.value;
     setSearchTerm(value);
+    setSelectedSuggestionIndex(-1);
     
     if (value) {
       const filtered = suggestions.filter(suggestion =>
@@ -162,9 +164,50 @@ const Home = () => {
     }
   };
 
+  const handleKeyDown = (e) => {
+    // If suggestions are not showing, don't handle keyboard navigation
+    if (!showSuggestions || filteredSuggestions.length === 0) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        handleSearch();
+      }
+      return;
+    }
+
+    switch (e.key) {
+      case 'ArrowDown':
+        e.preventDefault();
+        setSelectedSuggestionIndex(prevIndex => 
+          prevIndex < filteredSuggestions.length - 1 ? prevIndex + 1 : prevIndex
+        );
+        break;
+      case 'ArrowUp':
+        e.preventDefault();
+        setSelectedSuggestionIndex(prevIndex => 
+          prevIndex > 0 ? prevIndex - 1 : -1
+        );
+        break;
+      case 'Enter':
+        e.preventDefault();
+        if (selectedSuggestionIndex >= 0) {
+          handleSuggestionClick(filteredSuggestions[selectedSuggestionIndex]);
+        } else {
+          handleSearch();
+        }
+        break;
+      case 'Escape':
+        setShowSuggestions(false);
+        setSelectedSuggestionIndex(-1);
+        break;
+      default:
+        break;
+    }
+  };
+
   const handleSuggestionClick = (suggestion) => {
     setSearchTerm(suggestion);
     setShowSuggestions(false);
+    setSelectedSuggestionIndex(-1);
   };
 
   return (
@@ -187,12 +230,7 @@ const Home = () => {
                 placeholder="ad tracking, ad security..."
                 value={searchTerm}
                 onChange={handleChange}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
-                    e.preventDefault();
-                    handleSearch();
-                  }
-                }}
+                onKeyDown={handleKeyDown}
                 style={{
                   width: '100%',
                   padding: '16px',
@@ -222,7 +260,7 @@ const Home = () => {
                       sx={{ 
                         padding: '10px', 
                         cursor: 'pointer',
-                        backgroundColor: 'white',
+                        backgroundColor: index === selectedSuggestionIndex ? '#e3e3e3' : 'white',
                         '&:hover': { backgroundColor: '#f0f0f0' }
                       }}
                     >
