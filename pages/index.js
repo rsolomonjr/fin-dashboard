@@ -58,6 +58,8 @@ const Home = () => {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState(-1);
 
+ 
+
   const handleSearch = async () => {
     setLoading(true);
     try {
@@ -163,9 +165,30 @@ const Home = () => {
       setShowSuggestions(false);
     }
   };
+  const suggestionsRef = React.useRef(null);
+  const scrollToSuggestion = (index) => {
+    if (!suggestionsRef.current) return;
+    
+    const suggestionElements = suggestionsRef.current.children;
+    if (index >= 0 && index < suggestionElements.length) {
+      const selectedElement = suggestionElements[index];
+      const containerHeight = suggestionsRef.current.clientHeight;
+      const elementHeight = selectedElement.offsetHeight;
+      const scrollTop = suggestionsRef.current.scrollTop;
+      const elementTop = selectedElement.offsetTop;
+      
+      // Scroll down if element is below viewport
+      if (elementTop + elementHeight > scrollTop + containerHeight) {
+        suggestionsRef.current.scrollTop = elementTop + elementHeight - containerHeight;
+      }
+      // Scroll up if element is above viewport
+      else if (elementTop < scrollTop) {
+        suggestionsRef.current.scrollTop = elementTop;
+      }
+    }
+  };
 
   const handleKeyDown = (e) => {
-    // If suggestions are not showing, don't handle keyboard navigation
     if (!showSuggestions || filteredSuggestions.length === 0) {
       if (e.key === 'Enter') {
         e.preventDefault();
@@ -177,15 +200,21 @@ const Home = () => {
     switch (e.key) {
       case 'ArrowDown':
         e.preventDefault();
-        setSelectedSuggestionIndex(prevIndex => 
-          prevIndex < filteredSuggestions.length - 1 ? prevIndex + 1 : prevIndex
-        );
+        setSelectedSuggestionIndex(prevIndex => {
+          const newIndex = prevIndex < filteredSuggestions.length - 1 ? prevIndex + 1 : prevIndex;
+          // Scroll after state update
+          setTimeout(() => scrollToSuggestion(newIndex), 0);
+          return newIndex;
+        });
         break;
       case 'ArrowUp':
         e.preventDefault();
-        setSelectedSuggestionIndex(prevIndex => 
-          prevIndex > 0 ? prevIndex - 1 : -1
-        );
+        setSelectedSuggestionIndex(prevIndex => {
+          const newIndex = prevIndex > 0 ? prevIndex - 1 : -1;
+          // Scroll after state update
+          setTimeout(() => scrollToSuggestion(newIndex), 0);
+          return newIndex;
+        });
         break;
       case 'Enter':
         e.preventDefault();
@@ -242,6 +271,7 @@ const Home = () => {
               />
               {showSuggestions && filteredSuggestions.length > 0 && (
                 <Box 
+                  ref={suggestionsRef}
                   position="absolute" 
                   top="100%" 
                   left={0} 
@@ -252,6 +282,22 @@ const Home = () => {
                   maxHeight="200px"
                   overflow="auto"
                   color="black"
+                  sx={{
+                    scrollBehavior: 'smooth',
+                    '&::-webkit-scrollbar': {
+                      width: '8px',
+                    },
+                    '&::-webkit-scrollbar-track': {
+                      background: '#f1f1f1',
+                    },
+                    '&::-webkit-scrollbar-thumb': {
+                      background: '#888',
+                      borderRadius: '4px',
+                    },
+                    '&::-webkit-scrollbar-thumb:hover': {
+                      background: '#555',
+                    },
+                  }}
                 >
                   {filteredSuggestions.map((suggestion, index) => (
                     <Box 
@@ -261,7 +307,8 @@ const Home = () => {
                         padding: '10px', 
                         cursor: 'pointer',
                         backgroundColor: index === selectedSuggestionIndex ? '#e3e3e3' : 'white',
-                        '&:hover': { backgroundColor: '#f0f0f0' }
+                        '&:hover': { backgroundColor: '#f0f0f0' },
+                        transition: 'background-color 0.2s ease'
                       }}
                     >
                       {suggestion}
