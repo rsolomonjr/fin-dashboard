@@ -59,7 +59,7 @@ This project is a dynamic ad technology news search engine built with React, Nex
 
 You can deploy this application to a static hosting platform like Vercel, Netlify, or Firebase. Refer to the documentation of your chosen platform for specific deployment instructions.
 
-## Demo
+### Demo
 [https://adtechnews.rodneysolomonjr.net/](https://adtechnews.rodneysolomonjr.net)
 
 ### Contributing
